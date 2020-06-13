@@ -8,7 +8,7 @@ const asyncHandler = require('../middleware/async');
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
   const bootcamps = await Bootcamp.find();
   console.log(bootcamps);
-  if (bootcamps.length < 1) {
+  if (bootcamps.length < 1 || bootcamps == undefined) {
     return next(
       new ErrorResponse(
         `There are no bootcamps registered on the database.`,
