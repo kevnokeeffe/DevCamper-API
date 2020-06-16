@@ -121,6 +121,7 @@ BootcampSchema.pre('save', async function (next) {
     zipcode: loc[0].zipcode,
     country: loc[0].countryCode,
   };
+  // TODO ## Might have an issue if someone enters an address that doesn't exist or is in error. Should look into a fix or handler for such instances. ##
 
   // Do not save address in DB
   this.address = undefined;

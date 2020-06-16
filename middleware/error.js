@@ -18,13 +18,13 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 400);
   }
 
-  //Mongoose validation error
+  // Mongoose validation error
   if (err.name === 'ValidationError') {
     const message = Object.values(err.errors).map((val) => val.message);
     error = new ErrorResponse(message, 400);
   }
 
-  //Entity type error, JSON file incorrect format
+  // Entity type error, JSON file incorrect format
   if (err.type === 'entity.parse.failed') {
     const message = 'Incorrect JSON format.';
     error = new ErrorResponse(message, 422);
