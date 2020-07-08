@@ -43,7 +43,7 @@ const deleteData = async () => {
   try {
     await Bootcamp.deleteMany();
     await Course.deleteMany();
-    console.log(' Data DSistroyed... '.red.inverse);
+    console.log(' Data Distroyed... '.red.inverse);
     process.exit();
   } catch (error) {
     console.log(error);
