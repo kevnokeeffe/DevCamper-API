@@ -79,8 +79,6 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     data: results,
   };
 
-  next();
-
   // Validating request
   if (advancedResults == undefined) {
     return next(
@@ -94,6 +92,8 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   if (advancedResults.length < 1 && advancedResults != undefined) {
     return next(new ErrorResponse('Looks like you entered an invalid query!'));
   }
+
+  next();
 };
 
 module.exports = advancedResults;
