@@ -19,7 +19,6 @@ const router = express.Router({ mergeParams: true });
 const advancedResults = require('../middleware/advancedResults');
 const { protect, authorize } = require('../middleware/auth');
 
-
 // Anything below this router.use(), uses contained middleware.
 router.use(protect);
 router.use(authorize('admin'));
