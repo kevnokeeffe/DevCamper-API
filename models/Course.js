@@ -45,34 +45,36 @@ const CourseSchema = new mongoose.Schema({
 
 // Static method to get avg of course tuitions
 CourseSchema.statics.getAverageCost = async function (bootcampId) {
-
   // Check to see if there are any course documents within the database
-  let count = await mongoose.connection.db.collection('Course', CourseSchema).countDocuments()
+  let count = await mongoose.connection.db
+    .collection('Course', CourseSchema)
+    .countDocuments();
 
   // Do if there are documents
-  if(count != 0){
-  const obj = await this.aggregate([
-    {
-      $match: { bootcamp: bootcampId },
-    },
-    {
-      $group: {
-        _id: '$bootcamp',
-        averageCost: { $avg: '$tuition' },
+  if (count != 0) {
+    const obj = await this.aggregate([
+      {
+        $match: { bootcamp: bootcampId },
       },
-    },
-  ]);
-  try {
-    await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
-      averageCost: Math.ceil(obj[0].averageCost / 10) * 10,
-    });
-  } catch (error) {
-    console.error(error);
+      {
+        $group: {
+          _id: '$bootcamp',
+          averageCost: { $avg: '$tuition' },
+        },
+      },
+    ]);
+    try {
+      await this.model('Bootcamp').findByIdAndUpdate(bootcampId, {
+        averageCost: Math.ceil(obj[0].averageCost / 10) * 10,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
 
-// Else do if they are not.
-else{console.log("No courses registered")}
+  // Else do if they are not.
+  else {
+  }
 };
 
 // Call getAerageCost after save
