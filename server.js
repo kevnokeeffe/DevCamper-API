@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Use custom logger
-// app.use(logger);
+app.use(logger);
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -63,9 +63,14 @@ const limiter = expressRateLimit({
   windowMs: 10 * 60 * 1000, // 10 minutes
   max: 100,
 });
-
 app.use(limiter);
 
+const authLimiter = expressRateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 5,
+});
+// app.use('/api/v1/auth', loginLimiter);
+ 
 // Prevent http param pollution
 app.use(hpp());
 
@@ -78,7 +83,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
-app.use('/api/v1/auth', auth);
+app.use('/api/v1/auth',authLimiter, auth);
 app.use('/api/v1/users', users);
 app.use('/api/v1/reviews', reviews);
 app.use(errorHandler);

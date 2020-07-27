@@ -1,6 +1,31 @@
 # DevCamper Backend API Specifications
 
-Create the backend for a bootcamp directory website. The frontend/UI will be created by another team. The html/css template has been created and can be used as a reference for functionality. All of the functionality below will be fully implmented in this project.
+> Backend API for DevCamper application, which is a bootcamp directory website.
+
+## Usage
+
+Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own
+
+## Install Dependencies
+
+```
+npm install
+```
+
+## Run App
+
+```
+# Run in dev mode
+npm run dev
+
+# Run in prod mode
+npm start
+```
+
+- Version: 1.0.0
+- Licence: MIT
+
+## All of the functionality below has been fully implmented into this project.
 
 ### Bootcamps
 
